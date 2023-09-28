@@ -1,0 +1,2 @@
+- Ejemplo de OTEL: https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/
+- Logging: https://reflectoring.io/node-logging-winston/
