@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: operate
+  name: operate
+spec:
+  ports:
+  - name: demo
+    port: 80
+    targetPort: 80
+  selector:
+    app: operate

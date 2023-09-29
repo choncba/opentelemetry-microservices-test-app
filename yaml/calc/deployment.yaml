@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: calc
+    demo: "true"
+  name: calc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calc
+  template:
+    metadata:
+      labels:
+        app: calc
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "python-instrumentation"
+    spec:
+      containers:
+      - image: lrbono/calc:latest
+        name: calc
+        imagePullPolicy: Always
+        env:
+          - name: "APP_NAME"
+            value: "calc"
+          - name: "PORT"
+            value: "80"
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 400m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always

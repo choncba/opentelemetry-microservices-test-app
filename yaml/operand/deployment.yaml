@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: operand
+    demo: "true"
+  name: operand
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operand
+  template:
+    metadata:
+      labels:
+        app: operand
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "python-instrumentation"
+    spec:
+      containers:
+      - image: lrbono/getoper:latest
+        name: operand
+        imagePullPolicy: Always
+        env:
+          - name: "APP_NAME"
+            value: "operand"
+          - name: "PORT"
+            value: "80"
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 400m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always

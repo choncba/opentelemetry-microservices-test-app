@@ -2,30 +2,34 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: front
+    app: operate
     demo: "true"
-  name: front
+  name: operate
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: front
+      app: operate
   template:
     metadata:
       labels:
-        app: front
+        app: operate
       annotations:
-        instrumentation.opentelemetry.io/inject-nodejs: "nodejs-instrumentation"
+        instrumentation.opentelemetry.io/inject-python: "python-instrumentation"
     spec:
       containers:
-      - image: lrbono/opentelemetrymicroservicestestapp_front:latest
-        name: front
+      - image: lrbono/operate:latest
+        name: operate
         imagePullPolicy: Always
         env:
           - name: "APP_NAME"
-            value: "front"
+            value: "operate"
+          - name: "APP_NAMESPACE"
+            value: "app"
+          - name: "PORT"
+            value: "80"
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources:
           limits:
             cpu: 400m

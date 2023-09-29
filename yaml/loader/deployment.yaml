@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: loader
+    demo: "true"
+  name: loader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loader
+  template:
+    metadata:
+      labels:
+        app: loader
+      # annotations:
+      #   instrumentation.opentelemetry.io/inject-python: "python-instrumentation"
+    spec:
+      containers:
+      - image: lrbono/loader:latest
+        name: loader
+        imagePullPolicy: Always
+        env:
+          - name: "APP_NAME"
+            value: "loader"
+          - name: "APP_NAMESPACE"
+            value: "app"
+          - name: "PYTHONUNBUFFERED"
+            value: "1"
+          - name: "PYTHONIOENCODING"
+            value: "utf-8"
+        resources:
+          limits:
+            cpu: 400m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always

@@ -30,8 +30,6 @@ spec:
       #   value: http/protobuf 
       # - name: "OTEL_PYTHON_LOG_FORMAT"
       #   value: "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s"
-      - name: "OTEL_PYTHON_LOG_LEVEL"
-        value: "info"
       # - name: OTEL_LOGS_EXPORTER
       #   # value: otlp_proto_http
       #   value: http/protobuf
@@ -50,5 +48,5 @@ spec:
   #     # - name: "OTEL_PYTHON_LOG_FORMAT"
   #     #   value: "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s"
   #   #     # value: "%(asctime)s [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s"
-      # - name: "OTEL_PYTHON_LOG_LEVEL"
-      #   value: "debug"
+      - name: "OTEL_PYTHON_LOG_LEVEL"
+        value: "debug"

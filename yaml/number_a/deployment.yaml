@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: number-a
+    demo: "true"
+  name: number-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: number-a
+  template:
+    metadata:
+      labels:
+        app: number-a
+      annotations:
+        instrumentation.opentelemetry.io/inject-nodejs: "nodejs-instrumentation"
+    spec:
+      containers:
+      - image: lrbono/getnumber:latest
+        name: number-a
+        imagePullPolicy: Always
+        env:
+          - name: "APP_NAME"
+            value: "number-a"
+          - name: "PORT"
+            value: "80"
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 400m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+      restartPolicy: Always
